@@ -1,0 +1,691 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>حاسبة باقات النقاط والإعلانات</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            cairo: ['Cairo', 'sans-serif'],
+          },
+          colors: {
+            brandNavy: '#0f172a',
+            brandBlue: '#1e3a8a',
+            brandRed: '#dc2626',
+          }
+        }
+      }
+    };
+  </script>
+<style>
+  :root { color-scheme: light; }
+  body { background: #f1f5f9; color: #1e293b; direction: rtl; }
+</style>
+<div dir="rtl" lang="ar" class="font-cairo bg-slate-100 text-slate-800 min-h-screen flex flex-col selection:bg-red-600 selection:text-white">
+
+
+  <!-- الهيدر العلوي بتدرج ألوان Dubizzle Automotive -->
+  <header class="bg-gradient-to-l from-[#0f172a] via-[#1e3a8a] to-[#991b1b] text-white shadow-lg">
+    <div class="max-w-5xl mx-auto px-4 py-6 sm:py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="text-center sm:text-right">
+        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-amber-300 mb-2 border border-white/15">
+          <span>أداة مبيعات السيارات</span>
+          <span>•</span>
+          <span>Dubizzle Automotive</span>
+        </div>
+        <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">حاسبة باقات النقاط والإعلانات</h1>
+        <p class="text-slate-200 text-sm sm:text-base mt-1">احسب أقصى عدد إعلانات أو صمم توليفة مخصصة لعميلك بدقة شاملة سعر الإعلان الأساسي</p>
+      </div>
+      <!-- شارة توضيحية سريعة -->
+      <div class="bg-slate-900/60 border border-white/15 rounded-2xl px-4 py-3 text-center sm:text-left shrink-0">
+        <div class="text-xs text-slate-300">سعر الإعلان الأساسي (Basic)</div>
+        <div class="flex items-center justify-center sm:justify-end gap-3 mt-1 font-bold text-sm">
+          <span class="text-emerald-400">أقل من 3M: 170</span>
+          <span class="text-slate-500">|</span>
+          <span class="text-sky-400">أكثر من 3M: 255</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- المحتوى الرئيسي -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 py-6 space-y-6">
+
+    <!-- بطاقة التحكم الرئيسية (إدخال النقاط + اختيار الفئة) -->
+    <section class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-5 sm:p-6 space-y-6">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+        
+        <!-- حقل إدخال رصيد النقاط -->
+        <div class="lg:col-span-6 space-y-2">
+          <label for="pointsInput" class="block text-sm font-bold text-slate-700">
+            إجمالي رصيد النقاط المتاح للعميل
+          </label>
+          <div class="relative">
+            <input
+              type="number"
+              id="pointsInput"
+              min="0"
+              step="10"
+              value="15000"
+              placeholder="أدخل عدد النقاط..."
+              class="w-full text-2xl sm:text-3xl font-extrabold text-[#0f172a] bg-slate-50 border-2 border-slate-300 focus:border-[#dc2626] focus:bg-white rounded-xl px-4 py-3 pl-20 outline-none transition-all"
+            />
+            <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sm font-bold text-slate-400 bg-slate-200/70 px-2.5 py-1 rounded-lg">
+              نقطة
+            </span>
+          </div>
+          <!-- أزرار الباقات الجاهزة -->
+          <div class="flex flex-wrap items-center gap-2 pt-1">
+            <span class="text-xs font-semibold text-slate-500 ml-1">باقات سريعة:</span>
+            <button type="button" data-preset="3800" class="preset-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 transition cursor-pointer">
+              3,800 نقطة
+            </button>
+            <button type="button" data-preset="15000" class="preset-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-[#dc2626] bg-red-50 text-[#dc2626] transition cursor-pointer">
+              15,000 نقطة
+            </button>
+            <button type="button" data-preset="25000" class="preset-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 transition cursor-pointer">
+              25,000 نقطة
+            </button>
+          </div>
+        </div>
+
+        <!-- اختيار الفئة السعرية للسيارات -->
+        <div class="lg:col-span-6 space-y-2">
+          <label class="block text-sm font-bold text-slate-700">
+            فئة أسعار السيارات المعلنة
+          </label>
+          <div class="grid grid-cols-2 gap-2 p-1.5 bg-slate-100 rounded-xl border border-slate-200">
+            <button
+              type="button"
+              id="tierBelowBtn"
+              class="tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 bg-[#0f172a] text-white shadow-sm cursor-pointer"
+            >
+              <span>أقل من 3 مليون</span>
+              <span class="text-[11px] font-normal opacity-85">Below 3M (Basic = 170)</span>
+            </button>
+            <button
+              type="button"
+              id="tierAboveBtn"
+              class="tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 text-slate-600 hover:text-slate-900 cursor-pointer"
+            >
+              <span>أكثر من 3 مليون</span>
+              <span class="text-[11px] font-normal opacity-85">Above 3M (Basic = 255)</span>
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- أزرار التبديل بين الوضعين (الاحتمالات الفردية vs التوليفة المخصصة) -->
+    <div class="flex flex-col sm:flex-row gap-2 bg-white p-2 rounded-2xl shadow-sm border border-slate-200/80">
+      <button
+        type="button"
+        id="tabSingleBtn"
+        class="flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 bg-[#dc2626] text-white shadow-sm cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+        </svg>
+        <span>الاحتمالات الفردية (الحد الأقصى)</span>
+      </button>
+      <button
+        type="button"
+        id="tabCustomBtn"
+        class="flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100 cursor-pointer"
+      >
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+        </svg>
+        <span>صمم توليفة مخصصة للعميل</span>
+      </button>
+    </div>
+
+    <!-- القسم الأول: الاحتمالات الفردية -->
+    <section id="singleModeSection" class="space-y-4">
+      <div class="flex items-center justify-between px-1">
+        <h2 class="text-base sm:text-lg font-extrabold text-[#0f172a]">
+          أقصى عدد إعلانات لكل نوع على حدة
+        </h2>
+        <span id="singleTierLabel" class="text-xs font-bold px-3 py-1 rounded-full bg-blue-100 text-[#1e3a8a]">
+          فئة أقل من 3 مليون
+        </span>
+      </div>
+
+      <div id="singleResultsGrid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- يتم توليد البطاقات ديناميكياً عبر JavaScript -->
+      </div>
+    </section>
+
+    <!-- القسم الثاني: صمم توليفة مخصصة للعميل -->
+    <section id="customModeSection" class="hidden space-y-5 pb-28 sm:pb-24">
+      <div class="flex flex-wrap items-center justify-between gap-2 px-1">
+        <div>
+          <h2 class="text-base sm:text-lg font-extrabold text-[#0f172a]">
+            كوّن باقة متنوعة تناسب احتياج العميل
+          </h2>
+          <p class="text-xs text-slate-500">استخدم أزرار (+) و (-) لإضافة أو تقليل الإعلانات ضمن الرصيد المتاح</p>
+        </div>
+        <button
+          type="button"
+          id="resetCustomBtnTop"
+          class="text-xs font-bold text-red-600 hover:text-red-700 bg-red-50 hover:bg-red-100 px-3 py-2 rounded-xl border border-red-200 transition cursor-pointer"
+        >
+          تصفير الاختيارات
+        </button>
+      </div>
+
+      <div id="customBuilderList" class="space-y-3">
+        <!-- يتم توليد صفوف التحكم ديناميكياً عبر JavaScript -->
+      </div>
+
+      <!-- شريط الملخص الثابت بالأسفل -->
+      <div class="fixed bottom-0 inset-x-0 z-40 bg-[#0f172a]/95 backdrop-blur-md text-white border-t border-slate-700 shadow-2xl">
+        <div class="max-w-5xl mx-auto px-4 py-3 sm:py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+          
+          <!-- أرقام الملخص -->
+          <div class="grid grid-cols-4 gap-2 sm:gap-6 w-full sm:w-auto text-center sm:text-right">
+            <div>
+              <div class="text-[11px] text-slate-400">الرصيد الكلي</div>
+              <div id="summaryTotalPts" class="text-sm sm:text-base font-extrabold text-white">15,000</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400">المستخدم</div>
+              <div id="summaryUsedPts" class="text-sm sm:text-base font-extrabold text-amber-400">0</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400">المتبقي</div>
+              <div id="summaryRemainingPts" class="text-sm sm:text-base font-extrabold text-emerald-400">15,000</div>
+            </div>
+            <div>
+              <div class="text-[11px] text-slate-400">إجمالي الإعلانات</div>
+              <div id="summaryTotalAds" class="text-sm sm:text-base font-extrabold text-sky-400">0 إعلان</div>
+            </div>
+          </div>
+
+          <!-- أزرار الإجراءات (إعادة ضبط + نسخ للواتساب) -->
+          <div class="flex items-center gap-2 w-full sm:w-auto">
+            <button
+              type="button"
+              id="resetCustomBtnBar"
+              class="px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 transition cursor-pointer"
+            >
+              إعادة ضبط
+            </button>
+            <button
+              type="button"
+              id="copyWhatsappBtn"
+              class="flex-1 sm:flex-initial px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-2 transition cursor-pointer"
+            >
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+              </svg>
+              <span>نسخ العرض للواتساب</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- الفوتر -->
+  <footer class="bg-white border-t border-slate-200 py-4 px-4 mt-auto">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-600 text-center sm:text-right">
+      <p class="font-bold text-slate-700">
+        ملحوظة: جميع الأسعار المحسوبة تشمل تكلفة الإعلان الأساسي (Basic) + تكلفة التمييز.
+      </p>
+      <span class="text-slate-400">Dubizzle Automotive Package Calculator</span>
+    </div>
+  </footer>
+
+  <!-- رسالة تنبيه (Toast) عند النسخ أو التنبيه -->
+  <div id="toastNotification" class="fixed top-5 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-all duration-300 transform -translate-y-3">
+    <div id="toastContent" class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-xl border border-slate-700 text-sm font-bold flex items-center gap-2.5">
+      <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+      <span id="toastText">تم نسخ العرض بنجاح!</span>
+    </div>
+  </div>
+
+  <script>
+    // تعريف بيانات الأسعار لكل فئة (شاملة تكلفة الإعلان الأساسي Basic)
+    const PRICING_DATA = {
+      below3m: {
+        label: 'أقل من 3 مليون (Below 3M)',
+        shortLabel: 'أقل من 3 مليون',
+        basicCost: 170,
+        ads: [
+          { id: 'basic', name: 'Basic', arDesc: 'إعلان أساسي قياسي', basic: 170, upgrade: 0, total: 170, badgeColor: 'bg-slate-100 text-slate-700' },
+          { id: 'refresh7', name: 'Refresh - 7 Days', arDesc: 'تحديث يومي لمدة 7 أيام', basic: 170, upgrade: 365, total: 535, badgeColor: 'bg-sky-50 text-sky-700' },
+          { id: 'featured7', name: 'Featured - 7 Days', arDesc: 'إعلان مميز لمدة 7 أيام', basic: 170, upgrade: 470, total: 640, badgeColor: 'bg-blue-50 text-blue-700' },
+          { id: 'featured14', name: 'Featured - 14 Days', arDesc: 'إعلان مميز لمدة 14 يوم', basic: 170, upgrade: 750, total: 920, badgeColor: 'bg-indigo-50 text-indigo-700' },
+          { id: 'elite7', name: 'Elite - 7 Days', arDesc: 'إعلان إيليت لمدة 7 أيام', basic: 170, upgrade: 1310, total: 1480, badgeColor: 'bg-amber-50 text-amber-800' },
+          { id: 'elite14', name: 'Elite - 14 Days', arDesc: 'إعلان إيليت لمدة 14 يوم', basic: 170, upgrade: 2095, total: 2265, badgeColor: 'bg-orange-50 text-orange-800' },
+          { id: 'cotw', name: 'Car of the Week', arDesc: 'سيارة الأسبوع (أعلى ظهور)', basic: 170, upgrade: 3400, total: 3570, badgeColor: 'bg-red-50 text-red-700' }
+        ]
+      },
+      above3m: {
+        label: 'أكثر من 3 مليون (Above 3M)',
+        shortLabel: 'أكثر من 3 مليون',
+        basicCost: 255,
+        ads: [
+          { id: 'basic', name: 'Basic', arDesc: 'إعلان أساسي قياسي', basic: 255, upgrade: 0, total: 255, badgeColor: 'bg-slate-100 text-slate-700' },
+          { id: 'refresh7', name: 'Refresh - 7 Days', arDesc: 'تحديث يومي لمدة 7 أيام', basic: 255, upgrade: 465, total: 720, badgeColor: 'bg-sky-50 text-sky-700' },
+          { id: 'featured7', name: 'Featured - 7 Days', arDesc: 'إعلان مميز لمدة 7 أيام', basic: 255, upgrade: 595, total: 850, badgeColor: 'bg-blue-50 text-blue-700' },
+          { id: 'featured14', name: 'Featured - 14 Days', arDesc: 'إعلان مميز لمدة 14 يوم', basic: 255, upgrade: 950, total: 1205, badgeColor: 'bg-indigo-50 text-indigo-700' },
+          { id: 'elite7', name: 'Elite - 7 Days', arDesc: 'إعلان إيليت لمدة 7 أيام', basic: 255, upgrade: 1675, total: 1930, badgeColor: 'bg-amber-50 text-amber-800' },
+          { id: 'elite14', name: 'Elite - 14 Days', arDesc: 'إعلان إيليت لمدة 14 يوم', basic: 255, upgrade: 2675, total: 2930, badgeColor: 'bg-orange-50 text-orange-800' },
+          { id: 'cotw', name: 'Car of the Week', arDesc: 'سيارة الأسبوع (أعلى ظهور)', basic: 255, upgrade: 4335, total: 4590, badgeColor: 'bg-red-50 text-red-700' }
+        ]
+      }
+    };
+
+    // حالة التطبيق (State)
+    let state = {
+      totalPoints: 15000,
+      tier: 'below3m', // 'below3m' | 'above3m'
+      activeTab: 'single', // 'single' | 'custom'
+      customCounts: {
+        basic: 0,
+        refresh7: 0,
+        featured7: 0,
+        featured14: 0,
+        elite7: 0,
+        elite14: 0,
+        cotw: 0
+      }
+    };
+
+    // دالة تنسيق الأرقام بفواصل الآلاف
+    function formatNum(num) {
+      return Number(num || 0).toLocaleString('en-US');
+    }
+
+    // إظهار رسالة إشعار مؤقتة (Toast)
+    let toastTimeout;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      const toastText = document.getElementById('toastText');
+      toastText.textContent = message;
+      toast.classList.remove('opacity-0', '-translate-y-3');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', '-translate-y-3');
+      }, 2800);
+    }
+
+    // حساب النقاط المستخدمة في التوليفة المخصصة
+    function getCustomUsedPoints() {
+      const tierAds = PRICING_DATA[state.tier].ads;
+      return tierAds.reduce((sum, ad) => {
+        const count = state.customCounts[ad.id] || 0;
+        return sum + (count * ad.total);
+      }, 0);
+    }
+
+    // التحقق من أن التوليفة المخصصة لا تتجاوز الرصيد عند تقليل النقاط أو تغيير الفئة
+    function clampCustomCountsIfNeeded() {
+      const tierAds = PRICING_DATA[state.tier].ads;
+      // إذا تجاوزت النقاط المستخدمة الرصيد الكلي الجديد، نقوم بتصفير التوليفة وتنبيه المستخدم
+      if (getCustomUsedPoints() > state.totalPoints) {
+        Object.keys(state.customCounts).forEach(key => {
+          state.customCounts[key] = 0;
+        });
+        showToast('تم تصفير التوليفة المخصصة لتتناسب مع الرصيد الجديد');
+      }
+    }
+
+    // تحديث واجهة أزرار الباقات الجاهزة
+    function updatePresetButtonsUI() {
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        const val = Number(btn.dataset.preset);
+        if (val === state.totalPoints) {
+          btn.className = 'preset-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-[#dc2626] bg-red-50 text-[#dc2626] transition cursor-pointer';
+        } else {
+          btn.className = 'preset-btn px-3 py-1.5 rounded-lg text-xs font-bold border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 transition cursor-pointer';
+        }
+      });
+    }
+
+    // تحديث واجهة أزرار الفئة (أقل من 3 مليون / أكثر من 3 مليون)
+    function updateTierButtonsUI() {
+      const belowBtn = document.getElementById('tierBelowBtn');
+      const aboveBtn = document.getElementById('tierAboveBtn');
+      const singleTierLabel = document.getElementById('singleTierLabel');
+
+      if (state.tier === 'below3m') {
+        belowBtn.className = 'tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 bg-[#0f172a] text-white shadow-sm cursor-pointer';
+        aboveBtn.className = 'tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 text-slate-600 hover:text-slate-900 cursor-pointer';
+        singleTierLabel.textContent = 'فئة أقل من 3 مليون (Basic = 170)';
+      } else {
+        aboveBtn.className = 'tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 bg-[#1e3a8a] text-white shadow-sm cursor-pointer';
+        belowBtn.className = 'tier-btn py-3 px-3 rounded-lg text-sm font-extrabold transition-all flex flex-col items-center justify-center gap-0.5 text-slate-600 hover:text-slate-900 cursor-pointer';
+        singleTierLabel.textContent = 'فئة أكثر من 3 مليون (Basic = 255)';
+      }
+    }
+
+    // تحديث واجهة التبويبات (الاحتمالات الفردية / صمم توليفة)
+    function updateTabsUI() {
+      const singleBtn = document.getElementById('tabSingleBtn');
+      const customBtn = document.getElementById('tabCustomBtn');
+      const singleSec = document.getElementById('singleModeSection');
+      const customSec = document.getElementById('customModeSection');
+
+      if (state.activeTab === 'single') {
+        singleBtn.className = 'flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 bg-[#dc2626] text-white shadow-sm cursor-pointer';
+        customBtn.className = 'flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100 cursor-pointer';
+        singleSec.classList.remove('hidden');
+        customSec.classList.add('hidden');
+      } else {
+        customBtn.className = 'flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 bg-[#dc2626] text-white shadow-sm cursor-pointer';
+        singleBtn.className = 'flex-1 py-3 px-4 rounded-xl text-sm sm:text-base font-extrabold transition-all flex items-center justify-center gap-2 text-slate-600 hover:bg-slate-100 cursor-pointer';
+        customSec.classList.remove('hidden');
+        singleSec.classList.add('hidden');
+      }
+    }
+
+    // رسم بطاقات الاحتمالات الفردية (الوضع الأول)
+    function renderSingleMode() {
+      const container = document.getElementById('singleResultsGrid');
+      const tierInfo = PRICING_DATA[state.tier];
+      const totalPts = Math.max(0, state.totalPoints);
+
+      container.innerHTML = tierInfo.ads.map(ad => {
+        const maxAds = Math.floor(totalPts / ad.total);
+        const remainderAfterMain = totalPts % ad.total;
+
+        // حساب إعلانات Basic الإضافية الممكنة من باقي النقاط (فقط للأنواع المميزة)
+        let extraBasicCount = 0;
+        let finalRemainder = remainderAfterMain;
+
+        if (ad.id !== 'basic' && remainderAfterMain >= tierInfo.basicCost) {
+          extraBasicCount = Math.floor(remainderAfterMain / tierInfo.basicCost);
+          finalRemainder = remainderAfterMain % tierInfo.basicCost;
+        }
+
+        // تفاصيل تكلفة الإعلان الواحد
+        const breakdownText = ad.upgrade === 0
+          ? `${formatNum(ad.total)} نقطة (إعلان أساسي فقط)`
+          : `${formatNum(ad.total)} نقطة = ${formatNum(ad.basic)} Basic + ${formatNum(ad.upgrade)} تمييز`;
+
+        const isUnavailable = maxAds === 0;
+
+        return `
+          <div class="bg-white rounded-2xl border ${isUnavailable ? 'border-slate-200 opacity-75' : 'border-slate-200/90 hover:border-slate-300'} p-4 sm:p-5 shadow-sm transition-all flex flex-col justify-between gap-4">
+            <div class="flex items-start justify-between gap-3">
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <h3 class="text-base sm:text-lg font-extrabold text-[#0f172a]" dir="ltr">${ad.name}</h3>
+                  <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${ad.badgeColor}">${ad.arDesc}</span>
+                </div>
+                <p class="text-xs font-semibold text-slate-500 mt-1.5">${breakdownText}</p>
+              </div>
+              <div class="text-left shrink-0 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 min-w-[84px] text-center">
+                <div class="text-2xl font-black ${isUnavailable ? 'text-slate-400' : 'text-[#dc2626]'} leading-none">${formatNum(maxAds)}</div>
+                <div class="text-[11px] font-bold text-slate-500 mt-1">إعلان</div>
+              </div>
+            </div>
+
+            <div class="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+              ${isUnavailable
+                ? `<span class="text-rose-600 font-bold">الرصيد غير كافٍ (يحتاج ${formatNum(ad.total - totalPts)} نقطة إضافية)</span>`
+                : `
+                  <div class="flex flex-wrap items-center gap-2">
+                    ${extraBasicCount > 0
+                      ? `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 font-bold px-2.5 py-1 rounded-lg">+ ${formatNum(extraBasicCount)} إعلان Basic إضافي</span>`
+                      : `<span class="text-slate-500 font-semibold">بدون إعلانات Basic إضافية</span>`
+                    }
+                  </div>
+                  <span class="text-slate-600 font-bold bg-slate-100 px-2.5 py-1 rounded-lg">
+                    المتبقي: <strong class="text-[#0f172a]">${formatNum(finalRemainder)}</strong> نقطة
+                  </span>
+                `
+              }
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // رسم أداة تصميم التوليفة المخصصة (الوضع الثاني)
+    function renderCustomMode() {
+      const container = document.getElementById('customBuilderList');
+      const tierInfo = PRICING_DATA[state.tier];
+      const totalPts = Math.max(0, state.totalPoints);
+      const usedPts = getCustomUsedPoints();
+      const remainingPts = totalPts - usedPts;
+
+      let totalAdsCount = 0;
+      Object.values(state.customCounts).forEach(c => { totalAdsCount += c; });
+
+      container.innerHTML = tierInfo.ads.map(ad => {
+        const count = state.customCounts[ad.id] || 0;
+        const subtotal = count * ad.total;
+        const canAdd = remainingPts >= ad.total;
+
+        const breakdownText = ad.upgrade === 0
+          ? `${formatNum(ad.total)} نقطة`
+          : `${formatNum(ad.total)} نقطة (${formatNum(ad.basic)} Basic + ${formatNum(ad.upgrade)} تمييز)`;
+
+        return `
+          <div class="bg-white rounded-2xl border ${count > 0 ? 'border-[#1e3a8a] ring-1 ring-[#1e3a8a]/15' : 'border-slate-200'} p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-all">
+            <div class="space-y-1">
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="text-base font-extrabold text-[#0f172a]" dir="ltr">${ad.name}</span>
+                <span class="text-[11px] font-bold px-2.5 py-0.5 rounded-full ${ad.badgeColor}">${ad.arDesc}</span>
+              </div>
+              <div class="text-xs font-semibold text-slate-500">${breakdownText}</div>
+            </div>
+
+            <div class="flex items-center justify-between sm:justify-end gap-4 pt-3 sm:pt-0 border-t sm:border-t-0 border-slate-100">
+              <!-- إجمالي نقاط هذا النوع -->
+              <div class="text-right sm:text-left min-w-[95px]">
+                <div class="text-[11px] text-slate-400">الإجمالي</div>
+                <div class="text-sm font-extrabold ${count > 0 ? 'text-[#1e3a8a]' : 'text-slate-400'}">
+                  ${formatNum(subtotal)} نقطة
+                </div>
+              </div>
+
+              <!-- أزرار التحكم بالكمية -->
+              <div class="flex items-center gap-2 bg-slate-100 p-1.5 rounded-xl border border-slate-200">
+                <button
+                  type="button"
+                  onclick="updateCustomCount('${ad.id}', -1)"
+                  ${count === 0 ? 'disabled' : ''}
+                  aria-label="تقليل العدد"
+                  class="w-9 h-9 rounded-lg font-extrabold text-lg flex items-center justify-center transition ${count === 0 ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-white text-slate-800 hover:bg-red-50 hover:text-red-600 shadow-sm cursor-pointer'}"
+                >
+                  −
+                </button>
+                <span class="w-9 text-center font-black text-base text-[#0f172a]">${count}</span>
+                <button
+                  type="button"
+                  onclick="updateCustomCount('${ad.id}', 1)"
+                  ${!canAdd ? 'disabled' : ''}
+                  aria-label="زيادة العدد"
+                  class="w-9 h-9 rounded-lg font-extrabold text-lg flex items-center justify-center transition ${!canAdd ? 'bg-slate-200 text-slate-400 cursor-not-allowed' : 'bg-[#0f172a] text-white hover:bg-[#dc2626] shadow-sm cursor-pointer'}"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      // تحديث شريط الملخص الثابت
+      document.getElementById('summaryTotalPts').textContent = formatNum(totalPts);
+      document.getElementById('summaryUsedPts').textContent = formatNum(usedPts);
+      document.getElementById('summaryRemainingPts').textContent = formatNum(remainingPts);
+      document.getElementById('summaryTotalAds').textContent = `${formatNum(totalAdsCount)} إعلان`;
+    }
+
+    // تعديل كمية نوع إعلان معين في التوليفة المخصصة
+    window.updateCustomCount = function(adId, delta) {
+      const tierInfo = PRICING_DATA[state.tier];
+      const ad = tierInfo.ads.find(item => item.id === adId);
+      if (!ad) return;
+
+      const currentCount = state.customCounts[adId] || 0;
+      const newCount = currentCount + delta;
+
+      if (newCount < 0) return;
+
+      if (delta > 0) {
+        const remaining = state.totalPoints - getCustomUsedPoints();
+        if (remaining < ad.total) {
+          showToast('الرصيد المتبقي لا يكفي لإضافة هذا الإعلان');
+          return;
+        }
+      }
+
+      state.customCounts[adId] = newCount;
+      renderCustomMode();
+    };
+
+    // إعادة ضبط التوليفة المخصصة
+    function resetCustomBuilder() {
+      Object.keys(state.customCounts).forEach(key => {
+        state.customCounts[key] = 0;
+      });
+      renderCustomMode();
+      showToast('تم تصفير التوليفة المخصصة');
+    }
+
+    // نسخ العرض المخصص بصيغة مرتبة للواتساب
+    function copyOfferToWhatsApp() {
+      const tierInfo = PRICING_DATA[state.tier];
+      const totalPts = Math.max(0, state.totalPoints);
+      const usedPts = getCustomUsedPoints();
+      const remainingPts = totalPts - usedPts;
+
+      const selectedItems = tierInfo.ads.filter(ad => (state.customCounts[ad.id] || 0) > 0);
+
+      if (selectedItems.length === 0) {
+        showToast('من فضلك اختر إعلاناً واحداً على الأقل لنسخ العرض');
+        return;
+      }
+
+      let totalAds = 0;
+      const lines = selectedItems.map(ad => {
+        const count = state.customCounts[ad.id];
+        totalAds += count;
+        const sub = count * ad.total;
+        return `• *${count}x ${ad.name}* (${ad.arDesc}) ⬅️ ${formatNum(sub)} نقطة`;
+      });
+
+      const message = [
+        `🚗 *عرض باقة إعلانات Dubizzle Automotive*`,
+        `━━━━━━━━━━━━━━━━━━━━`,
+        `📦 *إجمالي رصيد الباقة:* ${formatNum(totalPts)} نقطة`,
+        `🏷️ *فئة السيارات:* ${tierInfo.shortLabel}`,
+        ``,
+        `📋 *تفاصيل الإعلانات المقترحة:*`,
+        ...lines,
+        ``,
+        `📊 *ملخص الاستخدام:*`,
+        `• إجمالي عدد الإعلانات: *${formatNum(totalAds)} إعلان*`,
+        `• النقاط المستخدمة: *${formatNum(usedPts)} نقطة*`,
+        `• الرصيد المتبقي: *${formatNum(remainingPts)} نقطة*`,
+        `━━━━━━━━━━━━━━━━━━━━`,
+        `_(ملاحظة: جميع الأسعار تشمل تكلفة نشر الإعلان الأساسي Basic + التمييز)_`
+      ].join('\n');
+
+      // استخدام textarea مؤقت مع execCommand('copy') لضمان العمل داخل بيئة الـ iFrame
+      const tempTextArea = document.createElement('textarea');
+      tempTextArea.value = message;
+      tempTextArea.style.position = 'fixed';
+      tempTextArea.style.opacity = '0';
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+
+      try {
+        const ok = document.execCommand('copy');
+        if (!ok) throw new Error('copy failed');
+        showToast('تم نسخ تفاصيل العرض بنجاح! جاهز للصق في واتساب');
+      } catch (err) {
+        showToast('تعذر النسخ التلقائي، يرجى المحاولة مرة أخرى');
+      } finally {
+        document.body.removeChild(tempTextArea);
+      }
+    }
+
+    // تحديث شامل للواجهة
+    function renderAll() {
+      updatePresetButtonsUI();
+      updateTierButtonsUI();
+      updateTabsUI();
+      renderSingleMode();
+      renderCustomMode();
+    }
+
+    // ربط الأحداث عند تحميل الصفحة
+    document.addEventListener('DOMContentLoaded', () => {
+      const pointsInput = document.getElementById('pointsInput');
+
+      // التحديث اللحظي عند كتابة النقاط
+      pointsInput.addEventListener('input', (e) => {
+        const val = parseInt(e.target.value, 10);
+        state.totalPoints = isNaN(val) || val < 0 ? 0 : val;
+        clampCustomCountsIfNeeded();
+        renderAll();
+      });
+
+      // أزرار الباقات السريعة
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const presetVal = Number(btn.dataset.preset);
+          state.totalPoints = presetVal;
+          pointsInput.value = presetVal;
+          clampCustomCountsIfNeeded();
+          renderAll();
+        });
+      });
+
+      // أزرار الفئة السعرية
+      document.getElementById('tierBelowBtn').addEventListener('click', () => {
+        if (state.tier !== 'below3m') {
+          state.tier = 'below3m';
+          clampCustomCountsIfNeeded();
+          renderAll();
+        }
+      });
+
+      document.getElementById('tierAboveBtn').addEventListener('click', () => {
+        if (state.tier !== 'above3m') {
+          state.tier = 'above3m';
+          clampCustomCountsIfNeeded();
+          renderAll();
+        }
+      });
+
+      // أزرار التبديل بين الوضعين
+      document.getElementById('tabSingleBtn').addEventListener('click', () => {
+        state.activeTab = 'single';
+        updateTabsUI();
+      });
+
+      document.getElementById('tabCustomBtn').addEventListener('click', () => {
+        state.activeTab = 'custom';
+        updateTabsUI();
+      });
+
+      // أزرار إعادة الضبط والنسخ
+      document.getElementById('resetCustomBtnTop').addEventListener('click', resetCustomBuilder);
+      document.getElementById('resetCustomBtnBar').addEventListener('click', resetCustomBuilder);
+      document.getElementById('copyWhatsappBtn').addEventListener('click', copyOfferToWhatsApp);
+
+      // التشغيل الأولي
+      renderAll();
+    });
+  </script>
+
+</div>
+
+</body></html>
